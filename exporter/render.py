@@ -1,9 +1,10 @@
 import base64
 import re
-from datetime import date
+from datetime import date, datetime
 from html import escape
 from pathlib import Path
 from string import Template
+from zoneinfo import ZoneInfo
 
 from models import Result
 
@@ -67,6 +68,7 @@ def render_discipline_page(
     results: list[Result],
     day: date,
     logo_file: Path | None = None,
+    timezone: ZoneInfo | None = None,
 ) -> str:
     """
     Renders a static HTML results page for a single discipline.
@@ -77,6 +79,7 @@ def render_discipline_page(
         results (list[Result]): The results to display for this discipline
         day (date): The competition date shown in the page header
         logo_file (Path | None): Optional path to a logo image to embed in the header
+        timezone (ZoneInfo | None): Timezone used for the "last update" timestamp
     Returns:
         str: The complete HTML document as a string
     """
@@ -101,6 +104,7 @@ def render_discipline_page(
         date=day.strftime("%d-%m-%Y"),
         logo=_logo_tag(logo_file),
         rows=rows,
+        generated=datetime.now(tz=timezone).strftime("%d-%m-%Y %H:%M"),
     )
 
 
@@ -110,6 +114,7 @@ def write_discipline_pages(
     output_folder: Path,
     template_file: Path,
     logo_file: Path | None = None,
+    timezone: ZoneInfo | None = None,
 ) -> list[Path]:
     """
     Writes one static HTML results page per discipline into the output folder.
@@ -121,6 +126,7 @@ def write_discipline_pages(
         output_folder (Path): The folder in which to write the HTML files
         template_file (Path): Path to the HTML page template file
         logo_file (Path | None): Optional path to a logo image to embed in each page
+        timezone (ZoneInfo | None): Timezone used for the "last update" timestamp
     Returns:
         list[Path]: Paths of the HTML files that were written
     """
@@ -130,7 +136,9 @@ def write_discipline_pages(
 
     written: list[Path] = []
     for discipline, results in results_per_discipline.items():
-        page = render_discipline_page(template, discipline, results, day, logo_file)
+        page = render_discipline_page(
+            template, discipline, results, day, logo_file, timezone
+        )
         out_file = output_folder / f"{_safe_filename(discipline)}-{date_str}.html"
         out_file.write_text(page, encoding="utf-8")
         written.append(out_file)

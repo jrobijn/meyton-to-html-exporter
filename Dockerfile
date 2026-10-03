@@ -13,7 +13,7 @@ RUN ./.venv/bin/pip install -r requirements.txt --no-cache-dir
 FROM python:3.14-slim-trixie
 
 # install packages needed to use mariadb connector
-RUN apt-get update -y && DEBIAN_FRONTEND=noninteractive apt-get install -y build-essential libmariadb-dev
+RUN apt-get update -y && DEBIAN_FRONTEND=noninteractive apt-get install -y build-essential libmariadb-dev tzdata
 
 # create unprivileged appuser. ref: https://stackoverflow.com/a/55757473/12429735RUN
 ENV USER=appuser

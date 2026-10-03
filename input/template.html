@@ -43,11 +43,17 @@ tbody td {
     padding: 0.6rem 0.8rem;
     border-bottom: 1px solid #333335;
     color: #ffffff;
+    font-size: 1.2rem;
 }
 tbody tr:nth-child(even) { background: #262628; }
 .rank, .series, .tens, .total { text-align: right; white-space: nowrap; }
 .name { font-weight: bold; }
 .total { font-weight: bold; }
+.last-update {
+    margin-top: 1.5rem;
+    font-size: 0.9rem;
+    color: #808080;
+}
 </style>
 </head>
 <body>
@@ -75,5 +81,6 @@ $logo
 $rows
 </tbody>
 </table>
+<footer class="last-update">Laatste update: $generated</footer>
 </body>
 </html>

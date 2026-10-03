@@ -2,6 +2,7 @@ import argparse
 import os
 from datetime import date
 from pathlib import Path
+from zoneinfo import ZoneInfo
 
 from dotenv import load_dotenv
 
@@ -18,6 +19,7 @@ def main(
     output_folder: Path,
     template_file: Path,
     logo_file: Path | None,
+    timezone: ZoneInfo | None = None,
 ):
     """
     Main function of the Meyton results exporter. Fetches the competition results for the
@@ -29,6 +31,7 @@ def main(
         output_folder (Path): Path to the folder where the HTML files should be saved
         template_file (Path): Path to the HTML page template file
         logo_file (Path | None): Optional path to a logo image to embed in each HTML page
+        timezone (ZoneInfo | None): Timezone used for the "last update" timestamp
     """
 
     results_per_discipline = get_results_per_discipline(db_settings, day)
@@ -39,6 +42,7 @@ def main(
         output_folder=output_folder,
         template_file=template_file,
         logo_file=logo_file,
+        timezone=timezone,
     )
 
     for path in written:
@@ -80,10 +84,14 @@ if __name__ == "__main__":
         database=os.getenv("MARIADB_DATABASE")
     )
 
+    timezone_name = os.getenv("TIMEZONE")
+    timezone = ZoneInfo(timezone_name) if timezone_name else None
+
     main(
         db_settings=db_settings,
         day=args.date,
         output_folder=args.output_folder,
         template_file=args.template_file,
         logo_file=args.logo_file,
+        timezone=timezone,
     )
