@@ -32,7 +32,6 @@ WORKDIR /home/${USER}/app
 COPY --chown=${USER}:${USER} --from=builder /app/.venv .venv
 COPY --chown=${USER}:${USER} exporter exporter
 COPY --chown=${USER}:${USER} queries queries
-COPY --chown=${USER}:${USER} assets assets
 COPY --chown=${USER}:${USER} input input
 
 # make sure python in .venv will be used

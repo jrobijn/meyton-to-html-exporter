@@ -67,7 +67,7 @@ if __name__ == "__main__":
     argparser.add_argument(
         "--logo-file",
         type=Path,
-        default=Path("assets") / "logo-white.png",
+        default=Path("input/assets") / "logo.png",
         help="Path to a logo image to embed in each HTML page."
     )
     args = argparser.parse_args()

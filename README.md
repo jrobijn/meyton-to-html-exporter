@@ -33,7 +33,7 @@ The execution of the script can be optionally customized using the following CLI
 | date                   | *Today*                 | The competition date for which results should be collected and exported (format YYYY-MM-DD) |
 | output-folder          | output                  | The output folder to which the generated HTML files should be saved                         |
 | template-file          | input/template.html     | Path to the HTML page template filled in for each discipline                                |
-| logo-file              | assets/logo-white.png   | Path to a logo image embedded into each HTML page (pass a non-existent path to omit it)     |
+| logo-file              | input/assets/logo.png   | Path to a logo image embedded into each HTML page (pass a non-existent path to omit it)     |
 
 Each generated file is named `<discipline>-<date>.html` (e.g. `air-rifle-10m-2026-03-21.html`).
 
