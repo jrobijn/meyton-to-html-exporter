@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>$discipline &ndash; $date</title>
+<style>
+* { box-sizing: border-box; }
+body {
+    margin: 0;
+    padding: 2rem;
+    font-family: Arial, Helvetica, sans-serif;
+    background: #1b1b1d;
+    color: #ececec;
+}
+header {
+    margin-bottom: 1.5rem;
+    overflow: hidden;
+}
+header img {
+    height: 72px;
+    float: left;
+    margin-right: 1.5rem;
+}
+.heading { overflow: hidden; }
+.heading h1 { margin: 0; font-size: 2.4rem; color: #ffffff; }
+.heading .date { margin: 0.25rem 0 0; font-size: 1.2rem; color: #b0b0b0; }
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 1.4rem;
+}
+thead th {
+    text-align: left;
+    padding: 0.6rem 0.8rem;
+    border-bottom: 3px solid #c79a3f;
+    color: #b0b0b0;
+    text-transform: uppercase;
+    font-size: 1rem;
+    letter-spacing: 0.05em;
+}
+tbody td {
+    padding: 0.6rem 0.8rem;
+    border-bottom: 1px solid #333335;
+    color: #ffffff;
+}
+tbody tr:nth-child(even) { background: #262628; }
+.rank, .series, .tens, .total { text-align: right; white-space: nowrap; }
+.name { font-weight: bold; }
+.total { font-weight: bold; }
+</style>
+</head>
+<body>
+<header>
+$logo
+<div class="heading">
+<h1>$discipline</h1>
+<p class="date">$date</p>
+</div>
+</header>
+<table>
+<thead>
+<tr>
+<th class="rank">#</th>
+<th class="name">Naam</th>
+<th class="club">Verenigingsnaam</th>
+<th class="series">S1</th>
+<th class="series">S2</th>
+<th class="series">S3</th>
+<th class="tens">Mouches</th>
+<th class="total">Totaal</th>
+</tr>
+</thead>
+<tbody>
+$rows
+</tbody>
+</table>
+</body>
+</html>
